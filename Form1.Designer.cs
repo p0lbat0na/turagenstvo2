@@ -30,7 +30,6 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.данныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.путевкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пездкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +46,11 @@
             this.поОтеллюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.поСтраховкеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.поДлительностиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.просмотрToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.туристыToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.поездкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.путевкиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -66,20 +70,14 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.данныеToolStripMenuItem,
             this.запросыToolStripMenuItem,
-            this.поискToolStripMenuItem});
+            this.поискToolStripMenuItem,
+            this.просмотрToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 56);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(718, 294);
-            this.dataGridView1.TabIndex = 2;
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // данныеToolStripMenuItem
             // 
@@ -90,24 +88,28 @@
             this.данныеToolStripMenuItem.Name = "данныеToolStripMenuItem";
             this.данныеToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.данныеToolStripMenuItem.Text = "Данные";
+            this.данныеToolStripMenuItem.Click += new System.EventHandler(this.данныеToolStripMenuItem_Click);
             // 
             // путевкиToolStripMenuItem
             // 
             this.путевкиToolStripMenuItem.Name = "путевкиToolStripMenuItem";
-            this.путевкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.путевкиToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.путевкиToolStripMenuItem.Text = "Путевки";
+            this.путевкиToolStripMenuItem.Click += new System.EventHandler(this.путевкиToolStripMenuItem_Click);
             // 
             // пездкиToolStripMenuItem
             // 
             this.пездкиToolStripMenuItem.Name = "пездкиToolStripMenuItem";
-            this.пездкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.пездкиToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.пездкиToolStripMenuItem.Text = "Поездки";
+            this.пездкиToolStripMenuItem.Click += new System.EventHandler(this.пездкиToolStripMenuItem_Click);
             // 
             // туристыToolStripMenuItem
             // 
             this.туристыToolStripMenuItem.Name = "туристыToolStripMenuItem";
-            this.туристыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.туристыToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.туристыToolStripMenuItem.Text = "Туристы";
+            this.туристыToolStripMenuItem.Click += new System.EventHandler(this.туристыToolStripMenuItem_Click);
             // 
             // запросыToolStripMenuItem
             // 
@@ -126,24 +128,28 @@
             this.сколькоТуристовПосетилоАнглиюВТекущемГодуToolStripMenuItem.Name = "сколькоТуристовПосетилоАнглиюВТекущемГодуToolStripMenuItem";
             this.сколькоТуристовПосетилоАнглиюВТекущемГодуToolStripMenuItem.Size = new System.Drawing.Size(363, 22);
             this.сколькоТуристовПосетилоАнглиюВТекущемГодуToolStripMenuItem.Text = "Сколько туристов посетило Англию в текущем году";
+            this.сколькоТуристовПосетилоАнглиюВТекущемГодуToolStripMenuItem.Click += new System.EventHandler(this.сколькоТуристовПосетилоАнглиюВТекущемГодуToolStripMenuItem_Click);
             // 
             // стоимостьПутевкиВТуристическийЛагерьToolStripMenuItem
             // 
             this.стоимостьПутевкиВТуристическийЛагерьToolStripMenuItem.Name = "стоимостьПутевкиВТуристическийЛагерьToolStripMenuItem";
             this.стоимостьПутевкиВТуристическийЛагерьToolStripMenuItem.Size = new System.Drawing.Size(363, 22);
             this.стоимостьПутевкиВТуристическийЛагерьToolStripMenuItem.Text = "Стоимость путевки в туристический лагерь";
+            this.стоимостьПутевкиВТуристическийЛагерьToolStripMenuItem.Click += new System.EventHandler(this.стоимостьПутевкиВТуристическийЛагерьToolStripMenuItem_Click);
             // 
             // естьЛиПутевкиВЕгипетToolStripMenuItem
             // 
             this.естьЛиПутевкиВЕгипетToolStripMenuItem.Name = "естьЛиПутевкиВЕгипетToolStripMenuItem";
             this.естьЛиПутевкиВЕгипетToolStripMenuItem.Size = new System.Drawing.Size(363, 22);
             this.естьЛиПутевкиВЕгипетToolStripMenuItem.Text = "Есть ли путевки в Египет";
+            this.естьЛиПутевкиВЕгипетToolStripMenuItem.Click += new System.EventHandler(this.естьЛиПутевкиВЕгипетToolStripMenuItem_Click);
             // 
             // вКакомОтелеОстановилсяТуристToolStripMenuItem
             // 
             this.вКакомОтелеОстановилсяТуристToolStripMenuItem.Name = "вКакомОтелеОстановилсяТуристToolStripMenuItem";
             this.вКакомОтелеОстановилсяТуристToolStripMenuItem.Size = new System.Drawing.Size(363, 22);
             this.вКакомОтелеОстановилсяТуристToolStripMenuItem.Text = "В каком отеле остановился турист...";
+            this.вКакомОтелеОстановилсяТуристToolStripMenuItem.Click += new System.EventHandler(this.вКакомОтелеОстановилсяТуристToolStripMenuItem_Click);
             // 
             // другойЗапросToolStripMenuItem
             // 
@@ -166,33 +172,72 @@
             // поСтранеToolStripMenuItem
             // 
             this.поСтранеToolStripMenuItem.Name = "поСтранеToolStripMenuItem";
-            this.поСтранеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.поСтранеToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.поСтранеToolStripMenuItem.Text = "По стране";
             // 
             // поСтоимостиToolStripMenuItem
             // 
             this.поСтоимостиToolStripMenuItem.Name = "поСтоимостиToolStripMenuItem";
-            this.поСтоимостиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.поСтоимостиToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.поСтоимостиToolStripMenuItem.Text = "По стоимости";
             // 
             // поОтеллюToolStripMenuItem
             // 
             this.поОтеллюToolStripMenuItem.Name = "поОтеллюToolStripMenuItem";
-            this.поОтеллюToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.поОтеллюToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.поОтеллюToolStripMenuItem.Text = "По отелю";
             this.поОтеллюToolStripMenuItem.Click += new System.EventHandler(this.поОтеллюToolStripMenuItem_Click);
             // 
             // поСтраховкеToolStripMenuItem
             // 
             this.поСтраховкеToolStripMenuItem.Name = "поСтраховкеToolStripMenuItem";
-            this.поСтраховкеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.поСтраховкеToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.поСтраховкеToolStripMenuItem.Text = "По страховке";
             // 
             // поДлительностиToolStripMenuItem
             // 
             this.поДлительностиToolStripMenuItem.Name = "поДлительностиToolStripMenuItem";
-            this.поДлительностиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.поДлительностиToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.поДлительностиToolStripMenuItem.Text = "По длительности";
+            // 
+            // просмотрToolStripMenuItem
+            // 
+            this.просмотрToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.туристыToolStripMenuItem1,
+            this.поездкиToolStripMenuItem,
+            this.путевкиToolStripMenuItem1});
+            this.просмотрToolStripMenuItem.Name = "просмотрToolStripMenuItem";
+            this.просмотрToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.просмотрToolStripMenuItem.Text = "Просмотр";
+            // 
+            // туристыToolStripMenuItem1
+            // 
+            this.туристыToolStripMenuItem1.Name = "туристыToolStripMenuItem1";
+            this.туристыToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.туристыToolStripMenuItem1.Text = "Туристы";
+            this.туристыToolStripMenuItem1.Click += new System.EventHandler(this.туристыToolStripMenuItem1_Click);
+            // 
+            // поездкиToolStripMenuItem
+            // 
+            this.поездкиToolStripMenuItem.Name = "поездкиToolStripMenuItem";
+            this.поездкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.поездкиToolStripMenuItem.Text = "Поездки";
+            this.поездкиToolStripMenuItem.Click += new System.EventHandler(this.поездкиToolStripMenuItem_Click);
+            // 
+            // путевкиToolStripMenuItem1
+            // 
+            this.путевкиToolStripMenuItem1.Name = "путевкиToolStripMenuItem1";
+            this.путевкиToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.путевкиToolStripMenuItem1.Text = "Путевки";
+            this.путевкиToolStripMenuItem1.Click += new System.EventHandler(this.путевкиToolStripMenuItem1_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(32, 51);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(718, 294);
+            this.dataGridView1.TabIndex = 2;
             // 
             // Form1
             // 
@@ -205,6 +250,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -234,6 +280,10 @@
         private System.Windows.Forms.ToolStripMenuItem поОтеллюToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem поСтраховкеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem поДлительностиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem просмотрToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem туристыToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem поездкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem путевкиToolStripMenuItem1;
     }
 }
 
