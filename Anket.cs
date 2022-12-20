@@ -16,6 +16,7 @@ namespace turagenstvo2
         string tablename;
         int colCount;
         string znacheniye;
+        string id;
         public Anket(string table, int count = 0, string znach = "")
         {
             colCount = count;
@@ -35,6 +36,7 @@ namespace turagenstvo2
                 label9.Hide();
                 textBox8.Hide();
                 textBox9.Hide();
+                id = "passp_dannye";
             }
             if (table == "putevki")
             {
@@ -48,6 +50,7 @@ namespace turagenstvo2
                 label8.Text = "Длительность";
                 label9.Hide();
                 textBox9.Hide();
+                id = "num";
             }
             if (table == "poezdki")
             {
@@ -60,6 +63,7 @@ namespace turagenstvo2
                 label7.Text = "Статус оплаты";
                 label8.Text = "Доп.информация";
                 label9.Text = "Стоимость";
+                id = "id";
             }
             if (count != 0)
             {
@@ -87,7 +91,7 @@ namespace turagenstvo2
             {
             if (tablename == "poezdki")
             {
-                query = $"INSERT INTO poezdkii (id,num_putevki,pasp_turista,data,data_vozvrasheniya,status,status_oplati,dop_infa,stoimost)VALUES(@atribut1, @atribut2,@atribut3,@atribut4,@atribut5,@atribut6,@atribut7,@atribut8)";
+                query = $"INSERT INTO poezdkii (id,num_putevki,pasp_turista,data,data_vozvrasheniya,status,status_oplati,dop_infa,stoimost)VALUES(@atribut1, @atribut2,@atribut3,@atribut4,@atribut5,@atribut6,@atribut7,@atribut8,@atribut9)";
             }
             if (tablename == "turisti")
             {
@@ -127,10 +131,8 @@ namespace turagenstvo2
                 MessageBoxDefaultButton.Button1,
                 MessageBoxOptions.DefaultDesktopOnly);
             
-                if (result == DialogResult.Yes)
-            
-                {
-            
+                if (result == DialogResult.Yes)            
+                {           
             
                     if (tablename == "poezdki")
                     {
@@ -143,11 +145,10 @@ namespace turagenstvo2
                     if (tablename == "putevki")
                     {
                         query = $"UPDATE putevki SET strana=@atribut2,gorod=@atribut3,mesto_projivaniya=@atribut4,stoimost=@atribut5,strahovka=@atribut6,dop_infa=@atribut7,dlitelnost=@atribut8 WHERE num=@atribut1";
-                    }
-            
+                    }         
             
                     SqlCommand command = new SqlCommand(query, connection);
-
+            
                     if (!String.IsNullOrEmpty(atribut1))
                     {
                         command.Parameters.Add("@atribut1", atribut1);
@@ -160,11 +161,40 @@ namespace turagenstvo2
                         command.Parameters.Add("@atribut8", atribut8);
                         command.Parameters.Add("@atribut9", atribut9);
                     }
-
+            
                     command.ExecuteNonQuery();
                     MessageBox.Show("Данные изменены");
                         }
             } 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            try
+            {
+                string query = $"DELETE FROM @atribut2 WHERE @atribut3=@atribut1";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                MessageBox.Show("Данные удалены");
+                if (!String.IsNullOrEmpty(textBox1.Text))
+            {
+                command.Parameters.Add("@atribut1", textBox1.Text);
+                command.Parameters.Add("@atribut2", tablename);
+                command.Parameters.Add("@atribut3", id);
+            }
+            else
+            {
+                MessageBox.Show("Введите идентификатор");
+            }
+            }
+            catch
+            {
+                MessageBox.Show("Данные не изменены");
+            }
+            
         }
     }
 }
