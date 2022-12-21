@@ -244,5 +244,16 @@ namespace turagenstvo2
             Anket f3 = new Anket("putevki");
             f3.Show();
         }
+
+        private void поСтранеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Query f2 = new Query("poisk", "putevki");
+            f2.Show();
+        }
+
+        private void поСтоимостиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 } 

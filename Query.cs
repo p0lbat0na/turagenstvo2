@@ -7,20 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace turagenstvo2
 {
     public partial class Query : Form
     {
         public static string[] atr = new string[4];
-        public Query(string naznach,bool txtbox1 = true, bool txtbox2 = true, bool txtbox3=true,bool txtbox4 = true, bool cmbbox1 = true)
+        public Query(string naznach,string poisk="",bool txtbox1 = true, bool txtbox2 = true, bool txtbox3=true,bool txtbox4 = true, bool cmbbox1 = true)
         {
+            atr[1] = poisk;
+            
             InitializeComponent();
             if (naznach== "poisk")
             {
                 txtbox1 = false;
                 txtbox2 = false;
                 txtbox3 = false;
+                label4.Text = "Параметр";
+                label5.Text = "Значение";
             }
             if (naznach == "query")
             {
@@ -31,6 +36,18 @@ namespace turagenstvo2
                 label1.Text = "Фамилия";
                 label2.Text = "Имя";
                 label3.Text = "Отчество";
+            }
+            if(poisk=="turist")
+            {
+                atr[2] = "7";
+            }
+            if (poisk == "poezdkii")
+            {
+                atr[2] = "9";
+            }
+            if (poisk == "putevki")
+            {
+                atr[2] = "8";
             }
             if (txtbox1 == false) textBox1.Hide();
             if (txtbox2 == false) textBox2.Hide();
@@ -69,8 +86,54 @@ namespace turagenstvo2
 
         private void Query_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "turagenstvoDataSet.turist". При необходимости она может быть перемещена или удалена.
+            this.turistTableAdapter.Fill(this.turagenstvoDataSet.turist);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "turagenstvoDataSet.poezdkii". При необходимости она может быть перемещена или удалена.
             this.poezdkiiTableAdapter.Fill(this.turagenstvoDataSet.poezdkii);
+
+        }
+        private void Poisk(string p, string z)
+
+        {
+
+
+
+
+
+            string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            string[] f = new string[10];
+            try
+            {
+
+                string query = $"SELECT * FROM {atr[1]} WHERE {p}='{z}'";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    for (int i = 0; i < Convert.ToInt32(atr[2]); i++)
+                    {
+                        f[i] = reader[i].ToString();
+                    }
+                }
+
+                //Form2 £2
+                //¥2.show()5
+                //this.Close()s
+                //
+                //
+                //
+                //ew Form2(Fl@], F[2], F121, F131)
+                
+            }
+            catch { } finally { connection.Close(); }
+            }
+        private void button2_Click(object sender, EventArgs e)
+        {
 
         }
     }

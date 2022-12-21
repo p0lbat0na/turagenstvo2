@@ -170,31 +170,83 @@ namespace turagenstvo2
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string atribut = textBox1.Text;
             string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
-            try
+            
+            string query = $"mkfkjmsuioh";
+            if (tablename == "putevki")
+                query = $"DELETE FROM putevki WHERE num=@atribut";
+            if (tablename == "poezdki")
+                query = $"DELETE FROM poezdkii WHERE id=@atribut";
+            if (tablename == "turisti")
             {
-                string query = $"DELETE FROM @atribut2 WHERE @atribut3=@atribut1";
-                SqlCommand command = new SqlCommand(query, connection);
-                command.ExecuteNonQuery();
-                MessageBox.Show("Данные удалены");
-                if (!String.IsNullOrEmpty(textBox1.Text))
-            {
-                command.Parameters.Add("@atribut1", textBox1.Text);
-                command.Parameters.Add("@atribut2", tablename);
-                command.Parameters.Add("@atribut3", id);
-            }
-            else
-            {
-                MessageBox.Show("Введите идентификатор");
-            }
-            }
-            catch
-            {
-                MessageBox.Show("Данные не изменены");
+                atribut = textBox4.Text;
+                query = $"DELETE FROM turist WHERE passp_dannye=@atribut";
             }
             
+            
+            
+                SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add("@atribut", atribut);
+                command.ExecuteNonQuery();
+                MessageBox.Show("Данные удалены");
+                
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+            string atribut = textBox1.Text;
+            
+            string query = "SELECT *";
+            if (tablename == "turisti") atribut = textBox4.Text;
+
+            if (!String.IsNullOrEmpty(atribut))
+            {
+
+                string p = "num";
+                
+                string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+                if (tablename=="putevki")
+                query = $"SELECT * FROM putevki WHERE {p}=@atribut";
+                if (tablename == "poezdki")
+                    query = $"SELECT * FROM poezdkii WHERE id=@atribut";
+                if (tablename == "turisti")
+                {
+                    atribut = textBox4.Text;
+                    query = $"SELECT * FROM turist WHERE passp_dannye=@atribut";
+                }                    
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.Add("@atribut", atribut);            
+
+                SqlDataReader reader = command.ExecuteReader();
+                int kolvo = 0;
+                while (reader.Read())
+            {
+                if (tablename == "turisti")
+                    textBox1.Text = reader[0].ToString();
+                textBox2.Text = reader[1].ToString();
+                textBox3.Text = reader[2].ToString();
+                if (tablename != "turisti")
+                    textBox4.Text = reader[3].ToString();
+                textBox5.Text = reader[4].ToString();
+                textBox6.Text = reader[5].ToString();
+                textBox7.Text = reader[6].ToString();
+                if (tablename != "turisti")
+                    textBox8.Text = reader[7].ToString();
+                if (tablename == "poezdki")
+                    textBox9.Text = reader[8].ToString();
+                    kolvo++;
+            }
+                if (kolvo == 0) MessageBox.Show("Данные не найдены");
+            
+                
+            }
         }
     }
 }

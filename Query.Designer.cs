@@ -43,8 +43,19 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.turistBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.turistTableAdapter = new turagenstvo2.turagenstvoDataSetTableAdapters.turistTableAdapter();
+            this.tableAdapterManager = new turagenstvo2.turagenstvoDataSetTableAdapters.TableAdapterManager();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.fKpoezdkiituristBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.poezdkiiBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.turagenstvoDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.poezdkiiBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.turistBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKpoezdkiituristBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.poezdkiiBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -82,6 +93,10 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "id",
+            "num_putevki",
+            "pasp_turista"});
             this.comboBox1.Location = new System.Drawing.Point(91, 208);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(151, 21);
@@ -156,11 +171,69 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "label5";
             // 
+            // turistBindingSource
+            // 
+            this.turistBindingSource.DataMember = "turist";
+            this.turistBindingSource.DataSource = this.turagenstvoDataSet;
+            // 
+            // turistTableAdapter
+            // 
+            this.turistTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.poezdkiiTableAdapter = this.poezdkiiTableAdapter;
+            this.tableAdapterManager.putevkiTableAdapter = null;
+            this.tableAdapterManager.turistTableAdapter = this.turistTableAdapter;
+            this.tableAdapterManager.UpdateOrder = turagenstvo2.turagenstvoDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DataSource = this.fKpoezdkiituristBindingSource;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(12, 358);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(341, 21);
+            this.comboBox2.TabIndex = 11;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DataSource = this.poezdkiiBindingSource1;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(12, 288);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(362, 21);
+            this.comboBox3.TabIndex = 12;
+            // 
+            // fKpoezdkiituristBindingSource
+            // 
+            this.fKpoezdkiituristBindingSource.DataMember = "FK_poezdkii_turist";
+            this.fKpoezdkiituristBindingSource.DataSource = this.turistBindingSource;
+            // 
+            // poezdkiiBindingSource1
+            // 
+            this.poezdkiiBindingSource1.DataMember = "poezdkii";
+            this.poezdkiiBindingSource1.DataSource = this.turagenstvoDataSet;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(223, 318);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Query
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(295, 408);
+            this.ClientSize = new System.Drawing.Size(386, 408);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -178,6 +251,9 @@
             this.Load += new System.EventHandler(this.Query_Load);
             ((System.ComponentModel.ISupportInitialize)(this.turagenstvoDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.poezdkiiBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.turistBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKpoezdkiituristBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.poezdkiiBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,5 +275,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.BindingSource turistBindingSource;
+        private turagenstvoDataSetTableAdapters.turistTableAdapter turistTableAdapter;
+        private turagenstvoDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.BindingSource fKpoezdkiituristBindingSource;
+        private System.Windows.Forms.BindingSource poezdkiiBindingSource1;
+        private System.Windows.Forms.Button button2;
     }
 }
