@@ -86,55 +86,55 @@ namespace turagenstvo2
 
         private void Query_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "turagenstvoDataSet.turist". При необходимости она может быть перемещена или удалена.
-            this.turistTableAdapter.Fill(this.turagenstvoDataSet.turist);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "turagenstvoDataSet.poezdkii". При необходимости она может быть перемещена или удалена.
-            this.poezdkiiTableAdapter.Fill(this.turagenstvoDataSet.poezdkii);
-
+        //    // TODO: данная строка кода позволяет загрузить данные в таблицу "turagenstvoDataSet.turist". При необходимости она может быть перемещена или удалена.
+        //    this.turistTableAdapter.Fill(this.turagenstvoDataSet.turist);
+        //    // TODO: данная строка кода позволяет загрузить данные в таблицу "turagenstvoDataSet.poezdkii". При необходимости она может быть перемещена или удалена.
+        //    this.poezdkiiTableAdapter.Fill(this.turagenstvoDataSet.poezdkii);
+        //
         }
-        private void Poisk(string p, string z)
-
-        {
-
-
-
-
-
-            string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
-            string[] f = new string[10];
-            try
-            {
-
-                string query = $"SELECT * FROM {atr[1]} WHERE {p}='{z}'";
-
-                SqlCommand command = new SqlCommand(query, connection);
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    for (int i = 0; i < Convert.ToInt32(atr[2]); i++)
-                    {
-                        f[i] = reader[i].ToString();
-                    }
-                }
-
-                //Form2 £2
-                //¥2.show()5
-                //this.Close()s
-                //
-                //
-                //
-                //ew Form2(Fl@], F[2], F121, F131)
-                
-            }
-            catch { } finally { connection.Close(); }
-            }
+        //private void Poisk(string p, string z)
+        //
+        //{
+        //
+        //
+        //
+        //
+        //    string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
+        //    // string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+        //    SqlConnection connection = new SqlConnection(connectionString);
+        //    connection.Open();
+        //    string[] f = new string[10];
+        //    try
+        //    {
+        //
+        //        string query = $"SELECT * FROM {atr[1]} WHERE {p}='{z}'";
+        //
+        //        SqlCommand command = new SqlCommand(query, connection);
+        //
+        //        SqlDataReader reader = command.ExecuteReader();
+        //
+        //        while (reader.Read())
+        //        {
+        //            for (int i = 0; i < Convert.ToInt32(atr[2]); i++)
+        //            {
+        //                f[i] = reader[i].ToString();
+        //            }
+        //        }
+        //
+        //        //Form2 £2
+        //        //¥2.show()5
+        //        //this.Close()s
+        //        //
+        //        //
+        //        //
+        //        //ew Form2(Fl@], F[2], F121, F131)
+        //        
+        //    }
+        //    catch { } finally { connection.Close(); }
+        //    }
         private void button2_Click(object sender, EventArgs e)
         {
-
+           //Anket.poisk(Query.poisk,)
         }
     }
 }

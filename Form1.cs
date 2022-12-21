@@ -30,7 +30,8 @@ namespace turagenstvo2
         }
         private void LoadData(string st, int k, List<string> colName, string atr1 = "", string atr2 = "", string atr3 = "")
         {
-            string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string query = st;
@@ -213,7 +214,7 @@ namespace turagenstvo2
 
         private void туристыToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Anket f3 = new Anket("turisti");
+            Anket f3 = new Anket("turist");
             f3.Show();
         }
         public class Table
@@ -235,7 +236,7 @@ namespace turagenstvo2
 
         private void поездкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Anket f3 = new Anket("poezdki");
+            Anket f3 = new Anket("poezdkii");
             f3.Show();
         }
 

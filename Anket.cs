@@ -23,7 +23,7 @@ namespace turagenstvo2
             tablename = table;
             znacheniye = znach;
             InitializeComponent();
-            if (table == "turisti")
+            if (table == "turist")
             {
                 label1.Text = "Фамилия";
                 label2.Text = "Имя";
@@ -52,7 +52,7 @@ namespace turagenstvo2
                 textBox9.Hide();
                 id = "num";
             }
-            if (table == "poezdki")
+            if (table == "poezdkii")
             {
                 label1.Text = "ID";
                 label2.Text = "Номер путевки";
@@ -83,17 +83,18 @@ namespace turagenstvo2
             string atribut8 = textBox8.Text;
             string atribut9 = textBox9.Text;
 
-            string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
+            //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string query = "kasjl";
             try
             {
-            if (tablename == "poezdki")
+            if (tablename == "poezdkii")
             {
                 query = $"INSERT INTO poezdkii (id,num_putevki,pasp_turista,data,data_vozvrasheniya,status,status_oplati,dop_infa,stoimost)VALUES(@atribut1, @atribut2,@atribut3,@atribut4,@atribut5,@atribut6,@atribut7,@atribut8,@atribut9)";
             }
-            if (tablename == "turisti")
+            if (tablename == "turist")
             {
                 query = $"INSERT INTO turist (familiya,imya,otchestvo,passp_dannye,e_mail,telefon,mesto_raboti)VALUES(@atribut1, @atribut2,@atribut3,@atribut4,@atribut5,@atribut6,@atribut7)";
             }
@@ -134,11 +135,11 @@ namespace turagenstvo2
                 if (result == DialogResult.Yes)            
                 {           
             
-                    if (tablename == "poezdki")
+                    if (tablename == "poezdkii")
                     {
                         query = $"UPDATE poezdkii SET num_putevki=@atribut2,pasp_turista=@atribut3,data=@atribut4,data_vozvrasheniya=@atribut5,status=@atribut6,status_oplati=@atribut7,dop_infa=@atribut8,stoimost=@atribut9 WHERE id=@atribut1";
                     }
-                    if (tablename == "turisti")
+                    if (tablename == "turist")
                     {
                         query = $"UPDATE turist SET familiya=@atribut1,imya=@atribut2,otchestvo=@atribut3,e_mail=@atribut5,telefon=@atribut6,mesto_raboti=@atribut7 WHERE passp_dannye=@atribut4";
                     }
@@ -171,16 +172,17 @@ namespace turagenstvo2
         private void button2_Click(object sender, EventArgs e)
         {
             string atribut = textBox1.Text;
-            string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
+            //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             
             string query = $"mkfkjmsuioh";
             if (tablename == "putevki")
                 query = $"DELETE FROM putevki WHERE num=@atribut";
-            if (tablename == "poezdki")
+            if (tablename == "poezdkii")
                 query = $"DELETE FROM poezdkii WHERE id=@atribut";
-            if (tablename == "turisti")
+            if (tablename == "turist")
             {
                 atribut = textBox4.Text;
                 query = $"DELETE FROM turist WHERE passp_dannye=@atribut";
@@ -196,57 +198,54 @@ namespace turagenstvo2
             
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        public void poisk(string table, string atribut,string pole)
         {
-            
-            string atribut = textBox1.Text;
-            
-            string query = "SELECT *";
-            if (tablename == "turisti") atribut = textBox4.Text;
-
             if (!String.IsNullOrEmpty(atribut))
             {
-
+                string query = "SELECT *";
                 string p = "num";
+                string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
+                //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
                 
-                string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
-                if (tablename=="putevki")
-                query = $"SELECT * FROM putevki WHERE {p}=@atribut";
-                if (tablename == "poezdki")
-                    query = $"SELECT * FROM poezdkii WHERE id=@atribut";
-                if (tablename == "turisti")
-                {
-                    atribut = textBox4.Text;
-                    query = $"SELECT * FROM turist WHERE passp_dannye=@atribut";
-                }                    
+                query = $"SELECT * FROM {tablename} WHERE {id}=@atribut";
+                
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.Add("@atribut", atribut);            
+                command.Parameters.Add("@atribut", atribut);
 
                 SqlDataReader reader = command.ExecuteReader();
                 int kolvo = 0;
                 while (reader.Read())
-            {
-                if (tablename == "turisti")
+                {
+
                     textBox1.Text = reader[0].ToString();
-                textBox2.Text = reader[1].ToString();
-                textBox3.Text = reader[2].ToString();
-                if (tablename != "turisti")
+                    textBox2.Text = reader[1].ToString();
+                    textBox3.Text = reader[2].ToString();
                     textBox4.Text = reader[3].ToString();
-                textBox5.Text = reader[4].ToString();
-                textBox6.Text = reader[5].ToString();
-                textBox7.Text = reader[6].ToString();
-                if (tablename != "turisti")
-                    textBox8.Text = reader[7].ToString();
-                if (tablename == "poezdki")
-                    textBox9.Text = reader[8].ToString();
+                    textBox5.Text = reader[4].ToString();
+                    textBox6.Text = reader[5].ToString();
+                    textBox7.Text = reader[6].ToString();
+                    if (tablename != "turist")
+                        textBox8.Text = reader[7].ToString();
+                    if (tablename == "poezdkii")
+                        textBox9.Text = reader[8].ToString();
                     kolvo++;
-            }
+                }
                 if (kolvo == 0) MessageBox.Show("Данные не найдены");
-            
-                
+
+
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+            string atribut = textBox1.Text;            
+            
+            if (tablename == "turist") atribut = textBox4.Text;
+            poisk(tablename, atribut, "key");
+            
         }
     }
 }
