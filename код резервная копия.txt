@@ -523,3 +523,53 @@ public partial class Query : Form
 
 
 
+
+
+
+
+
+
+
+string st = textBox1.Text;
+            string b1 = "textBox1.Text";
+            if (tablename == "turisti") b1 = "textBox4.Text";
+
+            if (!String.IsNullOrEmpty(st))
+            {
+                //try
+                //{
+                    string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
+                    string query = $"SELECT * FROM @atribut2 WHERE @atribut3=@atribut1";
+                    SqlConnection connection = new SqlConnection(connectionString);
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                
+                        
+                    
+
+
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+
+                    
+
+                    while (reader.Read())
+                    {
+                        if(tablename != "turisti")
+                        textBox1.Text = reader[0].ToString();
+                        textBox2.Text = reader[1].ToString();
+                        textBox3.Text = reader[2].ToString();
+                        if (tablename != "turisti")
+                            textBox4.Text = reader[3].ToString();
+                        textBox5.Text = reader[4].ToString();
+                        textBox6.Text = reader[5].ToString();
+                        textBox7.Text = reader[6].ToString();
+                        if (tablename != "turisti")
+                            textBox8.Text = reader[7].ToString();
+                        if (tablename == "poezdki")
+                            textBox9.Text = reader[8].ToString();
+                    }
+                command.Parameters.Add("@atribut1", textBox1.Text);
+                        command.Parameters.Add("@atribut2", tablename);
+                        command.Parameters.Add("@atribut3", id);
