@@ -34,6 +34,8 @@ namespace turagenstvo2
             if (naznach == "query")
             {
                 comboBox1.Hide();
+                comboBox2.Hide();
+                comboBox3.Hide();
                 textBox4.Hide();
                 label4.Hide();
                 label5.Hide();
@@ -103,6 +105,7 @@ namespace turagenstvo2
         {
             Anket f3 = new Anket(atr[1]);
             f3.Show();
+            this.Hide();
             string pole = comboBox1.Text + comboBox2.Text + comboBox3.Text;
             f3.poisk(atr[1], textBox4.Text, pole);
         }

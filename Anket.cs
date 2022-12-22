@@ -220,24 +220,34 @@ namespace turagenstvo2
                 SqlDataReader reader = command.ExecuteReader();
                 int kolvo = 0;
                 int i = 0;
-                
+                try
+                {
                     while (reader.Read())
                     {
 
-                        result[kolvo,0] = reader[0].ToString();
-                        result[kolvo,1] = reader[1].ToString();
-                        result[kolvo,2] = reader[2].ToString();
-                        result[kolvo,3] = reader[3].ToString();
-                        result[kolvo,4] = reader[4].ToString();
-                        result[kolvo,5] = reader[5].ToString();
-                        result[kolvo,6] = reader[6].ToString();
+                        result[kolvo, 0] = reader[0].ToString();
+                        result[kolvo, 1] = reader[1].ToString();
+                        result[kolvo, 2] = reader[2].ToString();
+                        result[kolvo, 3] = reader[3].ToString();
+                        result[kolvo, 4] = reader[4].ToString();
+                        result[kolvo, 5] = reader[5].ToString();
+                        result[kolvo, 6] = reader[6].ToString();
                         if (tablename != "turist")
-                        result[kolvo,7] = reader[7].ToString();
+                            result[kolvo, 7] = reader[7].ToString();
                         if (tablename == "poezdkii")
-                        result[kolvo,8] = reader[8].ToString();
+                            result[kolvo, 8] = reader[8].ToString();
                         kolvo++;
                     }
-                    if (kolvo == 0) MessageBox.Show("Данные не найдены");
+                }
+                catch
+                {
+                    MessageBox.Show("Неверный формат");
+                }
+                if (kolvo == 0)
+                {
+                    MessageBox.Show("Данные не найдены");
+                    this.Hide();
+                }
                 show(0);
 
             }
@@ -254,8 +264,8 @@ namespace turagenstvo2
             textBox7.Text = result[ecz, 6];
             textBox8.Text = result[ecz, 7];
             textBox9.Text = result[ecz, 8];
-            label10.Text += row.ToString() + " ";
-            //if (result[ecz, 0] == "") row = 0;
+            //label10.Text += row.ToString() + " ";
+            if (textBox1.Text == "") row--;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -274,32 +284,25 @@ namespace turagenstvo2
         }
 
         private void button4_Click(object sender, EventArgs e)
-        {
-            try
-            {
+        {   
                 row--;
+            if (row<0) row=0;
                 show(row);
-            }
-            catch {
-                row=0;
-                show(row);
-            }
-            label10.Text += row.ToString() + " ";
+            
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            try
-            {
+            if (row < 0) row = 0;
+            
                 row++;
-                show(row);
-            }
-            catch
-            {
-                row --;
-                show(row);
-            }
-            label10.Text += row.ToString() + " ";
+                show(row);        
+            
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

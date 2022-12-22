@@ -21,7 +21,8 @@ namespace turagenstvo2
 
         private void поОтеллюToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Query f2 = new Query("poisk", "turist");
+            f2.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
