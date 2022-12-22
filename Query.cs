@@ -14,46 +14,56 @@ namespace turagenstvo2
     public partial class Query : Form
     {
         public static string[] atr = new string[4];
-        public Query(string naznach,string poisk="",bool txtbox1 = true, bool txtbox2 = true, bool txtbox3=true,bool txtbox4 = true, bool cmbbox1 = true)
+        public Query(string naznach,string poisk="")
         {
             atr[1] = poisk;
             
             InitializeComponent();
             if (naznach== "poisk")
             {
-                txtbox1 = false;
-                txtbox2 = false;
-                txtbox3 = false;
+                textBox1.Hide();
+                textBox2.Hide();
+                textBox3.Hide();
+                label1.Hide();
+                label2.Hide();
+                label3.Hide();
                 label4.Text = "Параметр";
                 label5.Text = "Значение";
+                button1.Hide();
             }
             if (naznach == "query")
             {
-                txtbox4 = false;
-                cmbbox1 = false;
+                comboBox1.Hide();
+                textBox4.Hide();
                 label4.Hide();
                 label5.Hide();
                 label1.Text = "Фамилия";
                 label2.Text = "Имя";
                 label3.Text = "Отчество";
+                button2.Hide();
             }
             if(poisk=="turist")
             {
+                comboBox1.Hide();
+                comboBox3.Hide();
                 atr[2] = "7";
+                atr[3] = "comboBox2.Text";
             }
             if (poisk == "poezdkii")
             {
+                comboBox2.Hide();
+                comboBox3.Hide();
+                atr[3] = "comboBox1.Text";
                 atr[2] = "9";
             }
             if (poisk == "putevki")
             {
+                atr[3] = "comboBox3.Text";
                 atr[2] = "8";
+                comboBox1.Hide();
+                comboBox2.Hide();
             }
-            if (txtbox1 == false) textBox1.Hide();
-            if (txtbox2 == false) textBox2.Hide();
-            if (txtbox3 == false) textBox3.Hide();
-            if (txtbox4 == false) textBox4.Hide();
-            if (cmbbox1 == false) comboBox1.Hide();
+            
             
             //string atr0, string atr1, string atr2, string atr3
             //atr[0] = atr0;
@@ -86,55 +96,15 @@ namespace turagenstvo2
 
         private void Query_Load(object sender, EventArgs e)
         {
-        //    // TODO: данная строка кода позволяет загрузить данные в таблицу "turagenstvoDataSet.turist". При необходимости она может быть перемещена или удалена.
-        //    this.turistTableAdapter.Fill(this.turagenstvoDataSet.turist);
-        //    // TODO: данная строка кода позволяет загрузить данные в таблицу "turagenstvoDataSet.poezdkii". При необходимости она может быть перемещена или удалена.
-        //    this.poezdkiiTableAdapter.Fill(this.turagenstvoDataSet.poezdkii);
-        //
+       
         }
-        //private void Poisk(string p, string z)
-        //
-        //{
-        //
-        //
-        //
-        //
-        //    string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
-        //    // string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
-        //    SqlConnection connection = new SqlConnection(connectionString);
-        //    connection.Open();
-        //    string[] f = new string[10];
-        //    try
-        //    {
-        //
-        //        string query = $"SELECT * FROM {atr[1]} WHERE {p}='{z}'";
-        //
-        //        SqlCommand command = new SqlCommand(query, connection);
-        //
-        //        SqlDataReader reader = command.ExecuteReader();
-        //
-        //        while (reader.Read())
-        //        {
-        //            for (int i = 0; i < Convert.ToInt32(atr[2]); i++)
-        //            {
-        //                f[i] = reader[i].ToString();
-        //            }
-        //        }
-        //
-        //        //Form2 £2
-        //        //¥2.show()5
-        //        //this.Close()s
-        //        //
-        //        //
-        //        //
-        //        //ew Form2(Fl@], F[2], F121, F131)
-        //        
-        //    }
-        //    catch { } finally { connection.Close(); }
-        //    }
+       
         private void button2_Click(object sender, EventArgs e)
         {
-           //Anket.poisk(Query.poisk,)
+            Anket f3 = new Anket(atr[1]);
+            f3.Show();
+            string pole = comboBox1.Text + comboBox2.Text + comboBox3.Text;
+            f3.poisk(atr[1], textBox4.Text, pole);
         }
     }
 }

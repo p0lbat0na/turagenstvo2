@@ -254,7 +254,8 @@ namespace turagenstvo2
 
         private void поСтоимостиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Query f2 = new Query("poisk", "poezdkii");
+            f2.Show();
         }
     }
 } 

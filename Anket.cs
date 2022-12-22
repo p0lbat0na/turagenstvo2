@@ -13,6 +13,8 @@ namespace turagenstvo2
 {
     public partial class Anket : Form
     {
+        string[,] result = new string[10, 9];
+        int row = 0;
         string tablename;
         int colCount;
         string znacheniye;
@@ -202,12 +204,13 @@ namespace turagenstvo2
         {
             if (!String.IsNullOrEmpty(atribut))
             {
+                
                 string query = "SELECT *";
                 string p = "num";
                 string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
                 //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
                 
-                query = $"SELECT * FROM {tablename} WHERE {id}=@atribut";
+                query = $"SELECT * FROM {table} WHERE {pole}=@atribut";
                 
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
@@ -216,26 +219,43 @@ namespace turagenstvo2
 
                 SqlDataReader reader = command.ExecuteReader();
                 int kolvo = 0;
-                while (reader.Read())
-                {
+                int i = 0;
+                
+                    while (reader.Read())
+                    {
 
-                    textBox1.Text = reader[0].ToString();
-                    textBox2.Text = reader[1].ToString();
-                    textBox3.Text = reader[2].ToString();
-                    textBox4.Text = reader[3].ToString();
-                    textBox5.Text = reader[4].ToString();
-                    textBox6.Text = reader[5].ToString();
-                    textBox7.Text = reader[6].ToString();
-                    if (tablename != "turist")
-                        textBox8.Text = reader[7].ToString();
-                    if (tablename == "poezdkii")
-                        textBox9.Text = reader[8].ToString();
-                    kolvo++;
-                }
-                if (kolvo == 0) MessageBox.Show("Данные не найдены");
-
+                        result[kolvo,0] = reader[0].ToString();
+                        result[kolvo,1] = reader[1].ToString();
+                        result[kolvo,2] = reader[2].ToString();
+                        result[kolvo,3] = reader[3].ToString();
+                        result[kolvo,4] = reader[4].ToString();
+                        result[kolvo,5] = reader[5].ToString();
+                        result[kolvo,6] = reader[6].ToString();
+                        if (tablename != "turist")
+                        result[kolvo,7] = reader[7].ToString();
+                        if (tablename == "poezdkii")
+                        result[kolvo,8] = reader[8].ToString();
+                        kolvo++;
+                    }
+                    if (kolvo == 0) MessageBox.Show("Данные не найдены");
+                show(0);
 
             }
+        }
+
+        public void show( int ecz)
+        {
+            textBox1.Text = result[ecz, 0];
+            textBox2.Text = result[ecz, 1];
+            textBox3.Text = result[ecz, 2];
+            textBox4.Text = result[ecz, 3];
+            textBox5.Text = result[ecz, 4];
+            textBox6.Text = result[ecz, 5];
+            textBox7.Text = result[ecz, 6];
+            textBox8.Text = result[ecz, 7];
+            textBox9.Text = result[ecz, 8];
+            label10.Text += row.ToString() + " ";
+            //if (result[ecz, 0] == "") row = 0;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -244,8 +264,42 @@ namespace turagenstvo2
             string atribut = textBox1.Text;            
             
             if (tablename == "turist") atribut = textBox4.Text;
-            poisk(tablename, atribut, "key");
+            poisk(tablename, atribut, id);
             
+        }
+
+        private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                row--;
+                show(row);
+            }
+            catch {
+                row=0;
+                show(row);
+            }
+            label10.Text += row.ToString() + " ";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                row++;
+                show(row);
+            }
+            catch
+            {
+                row --;
+                show(row);
+            }
+            label10.Text += row.ToString() + " ";
         }
     }
 }
