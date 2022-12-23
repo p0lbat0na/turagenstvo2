@@ -1,4 +1,7 @@
-public partial class Form1 : Form
+namespace turagenstvo2
+{
+    
+    public partial class Form1 : Form
     {
         public Form1()
         {
@@ -7,7 +10,8 @@ public partial class Form1 : Form
 
         private void поОтеллюToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Query f2 = new Query("poisk", "turist");
+            f2.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -17,6 +21,7 @@ public partial class Form1 : Form
         private void LoadData(string st, int k, List<string> colName, string atr1 = "", string atr2 = "", string atr3 = "")
         {
             string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string query = st;
@@ -199,7 +204,7 @@ public partial class Form1 : Form
 
         private void туристыToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Anket f3 = new Anket("turisti");
+            Anket f3 = new Anket("turist");
             f3.Show();
         }
         public class Table
@@ -221,7 +226,7 @@ public partial class Form1 : Form
 
         private void поездкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Anket f3 = new Anket("poezdki");
+            Anket f3 = new Anket("poezdkii");
             f3.Show();
         }
 
@@ -230,7 +235,20 @@ public partial class Form1 : Form
             Anket f3 = new Anket("putevki");
             f3.Show();
         }
+
+        private void поСтранеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Query f2 = new Query("poisk", "putevki");
+            f2.Show();
+        }
+
+        private void поСтоимостиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Query f2 = new Query("poisk", "poezdkii");
+            f2.Show();
+        }
     }
+} 
 
 
 
@@ -244,8 +262,24 @@ public partial class Form1 : Form
 
 
 
-public partial class Anket : Form
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace turagenstvo2
+{
+    public partial class Anket : Form
     {
+        string[,] result = new string[10, 9];
+        int row = 0;
         string tablename;
         int colCount;
         string znacheniye;
@@ -256,7 +290,7 @@ public partial class Anket : Form
             tablename = table;
             znacheniye = znach;
             InitializeComponent();
-            if (table == "turisti")
+            if (table == "turist")
             {
                 label1.Text = "Фамилия";
                 label2.Text = "Имя";
@@ -285,7 +319,7 @@ public partial class Anket : Form
                 textBox9.Hide();
                 id = "num";
             }
-            if (table == "poezdki")
+            if (table == "poezdkii")
             {
                 label1.Text = "ID";
                 label2.Text = "Номер путевки";
@@ -316,17 +350,18 @@ public partial class Anket : Form
             string atribut8 = textBox8.Text;
             string atribut9 = textBox9.Text;
 
+            //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
             string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string query = "kasjl";
             try
             {
-            if (tablename == "poezdki")
+            if (tablename == "poezdkii")
             {
                 query = $"INSERT INTO poezdkii (id,num_putevki,pasp_turista,data,data_vozvrasheniya,status,status_oplati,dop_infa,stoimost)VALUES(@atribut1, @atribut2,@atribut3,@atribut4,@atribut5,@atribut6,@atribut7,@atribut8,@atribut9)";
             }
-            if (tablename == "turisti")
+            if (tablename == "turist")
             {
                 query = $"INSERT INTO turist (familiya,imya,otchestvo,passp_dannye,e_mail,telefon,mesto_raboti)VALUES(@atribut1, @atribut2,@atribut3,@atribut4,@atribut5,@atribut6,@atribut7)";
             }
@@ -367,11 +402,11 @@ public partial class Anket : Form
                 if (result == DialogResult.Yes)            
                 {           
             
-                    if (tablename == "poezdki")
+                    if (tablename == "poezdkii")
                     {
                         query = $"UPDATE poezdkii SET num_putevki=@atribut2,pasp_turista=@atribut3,data=@atribut4,data_vozvrasheniya=@atribut5,status=@atribut6,status_oplati=@atribut7,dop_infa=@atribut8,stoimost=@atribut9 WHERE id=@atribut1";
                     }
-                    if (tablename == "turisti")
+                    if (tablename == "turist")
                     {
                         query = $"UPDATE turist SET familiya=@atribut1,imya=@atribut2,otchestvo=@atribut3,e_mail=@atribut5,telefon=@atribut6,mesto_raboti=@atribut7 WHERE passp_dannye=@atribut4";
                     }
@@ -403,33 +438,139 @@ public partial class Anket : Form
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string atribut = textBox1.Text;
+            //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
             string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
-            try
+            
+            string query = $"mkfkjmsuioh";
+            if (tablename == "putevki")
+                query = $"DELETE FROM putevki WHERE num=@atribut";
+            if (tablename == "poezdkii")
+                query = $"DELETE FROM poezdkii WHERE id=@atribut";
+            if (tablename == "turist")
             {
-                string query = $"DELETE FROM @atribut2 WHERE @atribut3=@atribut1";
-                SqlCommand command = new SqlCommand(query, connection);
-                command.ExecuteNonQuery();
-                MessageBox.Show("Данные удалены");
-                if (!String.IsNullOrEmpty(textBox1.Text))
-            {
-                command.Parameters.Add("@atribut1", textBox1.Text);
-                command.Parameters.Add("@atribut2", tablename);
-                command.Parameters.Add("@atribut3", id);
-            }
-            else
-            {
-                MessageBox.Show("Введите идентификатор");
-            }
-            }
-            catch
-            {
-                MessageBox.Show("Данные не изменены");
+                atribut = textBox4.Text;
+                query = $"DELETE FROM turist WHERE passp_dannye=@atribut";
             }
             
+            
+            
+                SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add("@atribut", atribut);
+                command.ExecuteNonQuery();
+                MessageBox.Show("Данные удалены");
+                
+            
+        }
+
+        public void poisk(string table, string atribut,string pole)
+        {
+            if (!String.IsNullOrEmpty(atribut))
+            {
+                
+                string query = "SELECT *";
+                string p = "num";
+                //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
+                string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+                
+                query = $"SELECT * FROM {table} WHERE {pole}=@atribut";
+                
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.Add("@atribut", atribut);
+
+                SqlDataReader reader = command.ExecuteReader();
+                int kolvo = 0;
+                int i = 0;
+                try
+                {
+                    while (reader.Read())
+                    {
+
+                        result[kolvo, 0] = reader[0].ToString();
+                        result[kolvo, 1] = reader[1].ToString();
+                        result[kolvo, 2] = reader[2].ToString();
+                        result[kolvo, 3] = reader[3].ToString();
+                        result[kolvo, 4] = reader[4].ToString();
+                        result[kolvo, 5] = reader[5].ToString();
+                        result[kolvo, 6] = reader[6].ToString();
+                        if (tablename != "turist")
+                            result[kolvo, 7] = reader[7].ToString();
+                        if (tablename == "poezdkii")
+                            result[kolvo, 8] = reader[8].ToString();
+                        kolvo++;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Неверный формат");
+                }
+                if (kolvo == 0)
+                {
+                    MessageBox.Show("Данные не найдены");
+                    this.Hide();
+                }
+                show(0);
+
+            }
+        }
+
+        public void show( int ecz)
+        {
+            textBox1.Text = result[ecz, 0];
+            textBox2.Text = result[ecz, 1];
+            textBox3.Text = result[ecz, 2];
+            textBox4.Text = result[ecz, 3];
+            textBox5.Text = result[ecz, 4];
+            textBox6.Text = result[ecz, 5];
+            textBox7.Text = result[ecz, 6];
+            textBox8.Text = result[ecz, 7];
+            textBox9.Text = result[ecz, 8];
+            //label10.Text += row.ToString() + " ";
+            if (textBox1.Text == "") row--;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+            string atribut = textBox1.Text;            
+            
+            if (tablename == "turist") atribut = textBox4.Text;
+            poisk(tablename, atribut, id);
+            
+        }
+
+        private void bindingNavigator1_RefreshItems(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {   
+                row--;
+            if (row<0) row=0;
+                show(row);
+            
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (row < 0) row = 0;
+            
+                row++;
+                show(row);        
+            
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
+}
 
 
 
@@ -456,33 +597,75 @@ public partial class Anket : Form
 
 
 
-public partial class Query : Form
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace turagenstvo2
+{
+    public partial class Query : Form
     {
         public static string[] atr = new string[4];
-        public Query(string naznach,bool txtbox1 = true, bool txtbox2 = true, bool txtbox3=true,bool txtbox4 = true, bool cmbbox1 = true)
+        public Query(string naznach,string poisk="")
         {
+            atr[1] = poisk;
+            
             InitializeComponent();
             if (naznach== "poisk")
             {
-                txtbox1 = false;
-                txtbox2 = false;
-                txtbox3 = false;
+                textBox1.Hide();
+                textBox2.Hide();
+                textBox3.Hide();
+                label1.Hide();
+                label2.Hide();
+                label3.Hide();
+                label4.Text = "Параметр";
+                label5.Text = "Значение";
+                button1.Hide();
             }
             if (naznach == "query")
             {
-                txtbox4 = false;
-                cmbbox1 = false;
+                comboBox1.Hide();
+                comboBox2.Hide();
+                comboBox3.Hide();
+                textBox4.Hide();
                 label4.Hide();
                 label5.Hide();
                 label1.Text = "Фамилия";
                 label2.Text = "Имя";
                 label3.Text = "Отчество";
+                button2.Hide();
             }
-            if (txtbox1 == false) textBox1.Hide();
-            if (txtbox2 == false) textBox2.Hide();
-            if (txtbox3 == false) textBox3.Hide();
-            if (txtbox4 == false) textBox4.Hide();
-            if (cmbbox1 == false) comboBox1.Hide();
+            if(poisk=="turist")
+            {
+                comboBox1.Hide();
+                comboBox3.Hide();
+                atr[2] = "7";
+                atr[3] = "comboBox2.Text";
+            }
+            if (poisk == "poezdkii")
+            {
+                comboBox2.Hide();
+                comboBox3.Hide();
+                atr[3] = "comboBox1.Text";
+                atr[2] = "9";
+            }
+            if (poisk == "putevki")
+            {
+                atr[3] = "comboBox3.Text";
+                atr[2] = "8";
+                comboBox1.Hide();
+                comboBox2.Hide();
+            }
+            
             
             //string atr0, string atr1, string atr2, string atr3
             //atr[0] = atr0;
@@ -515,61 +698,16 @@ public partial class Query : Form
 
         private void Query_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "turagenstvoDataSet.poezdkii". При необходимости она может быть перемещена или удалена.
-            this.poezdkiiTableAdapter.Fill(this.turagenstvoDataSet.poezdkii);
-
+       
+        }
+       
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Anket f3 = new Anket(atr[1]);
+            f3.Show();
+            this.Hide();
+            string pole = comboBox1.Text + comboBox2.Text + comboBox3.Text;
+            f3.poisk(atr[1], textBox4.Text, pole);
         }
     }
-
-
-
-
-
-
-
-
-
-
-string st = textBox1.Text;
-            string b1 = "textBox1.Text";
-            if (tablename == "turisti") b1 = "textBox4.Text";
-
-            if (!String.IsNullOrEmpty(st))
-            {
-                //try
-                //{
-                    string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
-                    string query = $"SELECT * FROM @atribut2 WHERE @atribut3=@atribut1";
-                    SqlConnection connection = new SqlConnection(connectionString);
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(query, connection);
-                
-                        
-                    
-
-
-
-                    SqlDataReader reader = command.ExecuteReader();
-
-
-                    
-
-                    while (reader.Read())
-                    {
-                        if(tablename != "turisti")
-                        textBox1.Text = reader[0].ToString();
-                        textBox2.Text = reader[1].ToString();
-                        textBox3.Text = reader[2].ToString();
-                        if (tablename != "turisti")
-                            textBox4.Text = reader[3].ToString();
-                        textBox5.Text = reader[4].ToString();
-                        textBox6.Text = reader[5].ToString();
-                        textBox7.Text = reader[6].ToString();
-                        if (tablename != "turisti")
-                            textBox8.Text = reader[7].ToString();
-                        if (tablename == "poezdki")
-                            textBox9.Text = reader[8].ToString();
-                    }
-                command.Parameters.Add("@atribut1", textBox1.Text);
-                        command.Parameters.Add("@atribut2", tablename);
-                        command.Parameters.Add("@atribut3", id);
+}
