@@ -58,7 +58,7 @@ namespace turagenstvo2
             {
                 label1.Text = "ID";
                 label2.Text = "Номер путевки";
-                label3.Text = "Пасспортные данные";
+                label3.Text = "Паспортные данные";
                 label4.Text = "Дата";
                 label5.Text = "Дата возвращения";
                 label6.Text = "Статус";
@@ -85,8 +85,8 @@ namespace turagenstvo2
             string atribut8 = textBox8.Text;
             string atribut9 = textBox9.Text;
 
-            string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
-            //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
+            string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string query = "kasjl";
@@ -174,8 +174,8 @@ namespace turagenstvo2
         private void button2_Click(object sender, EventArgs e)
         {
             string atribut = textBox1.Text;
-            string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
-            //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
+            string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             
@@ -207,8 +207,8 @@ namespace turagenstvo2
                 
                 string query = "SELECT *";
                 string p = "num";
-                string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
-                //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+                //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
+                string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
                 
                 query = $"SELECT * FROM {table} WHERE {pole}=@atribut";
                 

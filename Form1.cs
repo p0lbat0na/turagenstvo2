@@ -31,8 +31,8 @@ namespace turagenstvo2
         }
         private void LoadData(string st, int k, List<string> colName, string atr1 = "", string atr2 = "", string atr3 = "")
         {
-            //string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
-            string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
+            string connectionString = "Data Source=311-UCH\\MSSQLSERVER1;Initial Catalog=turagenstvo;Integrated Security=True";
+            //string connectionString = "Data Source=DESKTOP-359A439\\SQLEXPRESS;Initial Catalog=turagenstvo;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string query = st;
@@ -114,7 +114,7 @@ namespace turagenstvo2
         //querys
         private void q1()
         {
-            string st = "Select num_putevki,familiya, imya, otchestvo, data from poezdkii, turist WHERE data BETWEEN '2022-01-01' AND '2022-12-31' AND num_putevki='7'";
+            string st = "Select poezdkii.num_putevki, turist.familiya, turist.imya, turist.otchestvo, poezdkii.data from poezdkii JOIN turist  ON turist.passp_dannye = poezdkii.pasp_turista WHERE data BETWEEN '2022-01-01' AND '2022-12-31' AND num_putevki='7'";
             int k = 5;
             List<string> colName =  new List<string>() { "Номер", "Фамилия","Имя","Отчество" ,"Дата" };
             LoadData(st, k, colName);
@@ -128,14 +128,22 @@ namespace turagenstvo2
         }
         private void q3()
         {
-            string st = "Select strana, num from putevki WHERE strana='Egypt'";
-            int k = 2;
-            List<string> colName =  new List<string>() { "Страна", "Номер" };
-            LoadData(st, k, colName);
+            Query f2 = new Query("query3");
+            f2.ShowDialog();
+
+            string country = Query.atr[1];
+
+            if (!String.IsNullOrEmpty(country))
+            {
+                string st = "Select strana, num from putevki WHERE strana=@atr1";
+                int k = 2;
+                List<string> colName = new List<string>() { "Страна", "Номер" };
+                LoadData(st, k, colName, country);
+            }
         }
         private void q4()
         {
-            Query f2 = new Query("query");
+            Query f2 = new Query("query4");
             f2.ShowDialog();
 
             string lastName = Query.atr[1];

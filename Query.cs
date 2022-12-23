@@ -31,7 +31,7 @@ namespace turagenstvo2
                 label5.Text = "Значение";
                 button1.Hide();
             }
-            if (naznach == "query")
+            if (naznach == "query4")
             {
                 comboBox1.Hide();
                 comboBox2.Hide();
@@ -44,7 +44,22 @@ namespace turagenstvo2
                 label3.Text = "Отчество";
                 button2.Hide();
             }
-            if(poisk=="turist")
+            if (naznach == "query3")
+            {
+                comboBox1.Hide();
+                comboBox2.Hide();
+                comboBox3.Hide();
+                textBox4.Hide();
+                label4.Hide();
+                label5.Hide();
+                textBox3.Hide();
+                textBox2.Hide();
+                label2.Hide();
+                label3.Hide();
+                label1.Text = "Страна";                
+                button2.Hide();
+            }
+            if (poisk=="turist")
             {
                 comboBox1.Hide();
                 comboBox3.Hide();
